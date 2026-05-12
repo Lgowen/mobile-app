@@ -1,0 +1,26 @@
+{
+  "name": "mobile-app",
+  "version": "1.0.0",
+  "private": true,
+  "description": "React Capacitor 移动应用 - pnpm monorepo",
+  "packageManager": "pnpm@8.6.1",
+  "scripts": {
+    "dev": "pnpm --filter @mobile/app dev",
+    "build": "pnpm --filter @mobile/shared build && pnpm --filter @mobile/app build",
+    "preview": "pnpm --filter @mobile/app preview",
+    "cap:sync": "pnpm --filter @mobile/app cap:sync",
+    "cap:ios": "pnpm --filter @mobile/app cap:ios",
+    "cap:android": "pnpm --filter @mobile/app cap:android",
+    "lint": "pnpm --filter @mobile/app lint",
+    "clean": "rimraf packages/*/dist packages/*/node_modules node_modules"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2",
+    "rimraf": "^5.0.5",
+    "typescript": "~5.7.0"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "pnpm": ">=8.0.0"
+  }
+}

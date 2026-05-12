@@ -1,0 +1,47 @@
+# Dependencies
+node_modules/
+packages/*/node_modules/
+.pnpm-store/
+
+# Build output
+dist/
+packages/*/dist/
+*.tsbuildinfo
+
+# Cache
+.vite/
+.turbo/
+.nx/
+.cache/
+
+# Capacitor native projects
+packages/app/android/
+packages/app/ios/
+
+# Test
+coverage/
+test-results/
+playwright-report/
+
+# Editor
+.vscode/
+.idea
+.DS_Store
+*.sw?
+
+# Logs
+*.log
+
+# Env files
+.env
+.env.local
+.env.*.local
+
+# Claude Code
+CLAUDE.local.md
+
+# Local config
+*.local
+
+# System
+Thumbs.db
