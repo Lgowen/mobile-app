@@ -8,14 +8,15 @@
     "dev": "pnpm --filter @mobile/app dev",
     "build": "pnpm --filter @mobile/shared build && pnpm --filter @mobile/app build",
     "preview": "pnpm --filter @mobile/app preview",
-    "cap:sync": "pnpm --filter @mobile/app cap:sync",
-    "cap:ios": "pnpm --filter @mobile/app cap:ios",
-    "cap:android": "pnpm --filter @mobile/app cap:android",
-    "lint": "pnpm --filter @mobile/app lint",
-    "clean": "rimraf packages/*/dist packages/*/node_modules node_modules"
+    "typecheck": "pnpm --filter @mobile/shared typecheck && pnpm --filter @mobile/app typecheck",
+    "clean": "rimraf packages/*/dist *.tsbuildinfo packages/*/*.tsbuildinfo",
+    "clean:all": "rimraf packages/*/dist packages/*/node_modules node_modules packages/app/*.js packages/app/*.d.ts packages/app/*.tsbuildinfo",
+    "deploy:ios": "[ -f .env.local ] && source .env.local; pnpm build && pnpm --filter @mobile/app deploy:ios",
+    "deploy:ios:release": "[ -f .env.local ] && source .env.local; pnpm build && pnpm --filter @mobile/app deploy:ios:release",
+    "archive:ios": "[ -f .env.local ] && source .env.local; pnpm build && pnpm --filter @mobile/app archive:ios",
+    "upload:ios": "[ -f .env.local ] && source .env.local; pnpm --filter @mobile/app upload:ios"
   },
   "devDependencies": {
-    "concurrently": "^8.2.2",
     "rimraf": "^5.0.5",
     "typescript": "~5.7.0"
   },

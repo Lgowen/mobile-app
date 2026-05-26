@@ -46,15 +46,27 @@ gem sources --remove https://rubygems.org/
 gem sources --add https://gems.ruby-china.com/
 gem install cocoapods --no-document
 
-# 4. 构建 Web 产物并同步到 iOS
-cd packages/app
-pnpm build          # Vite 构建 React 代码
-pnpm cap:sync       # 同步 web 资源到 iOS 项目 + 自动 pod install
+# 4. 配置环境变量
+# 在项目根目录创建 .env.local（已 gitignore）
+cat > .env.local << 'EOF'
+APPLE_TEAM_ID=QV7G5PG495
+IOS_DEVICE_UDID=BBF6E2D4-761C-59C9-9B05-D9C3850870DC
+APPLE_ID=your@email.com
+EOF
 
-# 5. 打开 Xcode 编译
-pnpm cap:ios        # 或手动打开 ios/App/App.xcworkspace
-# 在 Xcode 中选择模拟器 → Cmd+R 编译运行
+# 5. 一键部署到真机（无线）
+pnpm deploy:ios
+# 执行链: source .env.local → pnpm build → cap sync → xcodebuild → xcrun devicectl install
 ```
+
+## 可用脚本
+
+| 脚本 | 说明 |
+|------|------|
+| `pnpm deploy:ios` | 一键编译 Debug 版安装到 iPhone（无线） |
+| `pnpm deploy:ios:release` | 编译 Release 版安装到 iPhone |
+| `pnpm archive:ios` | 打包 Archive 导出 .ipa |
+| `pnpm upload:ios` | 上传到 App Store |
 
 如果 sync 后 pod 依赖有问题，再手动执行：`cd ios/App && pod install`
 
@@ -160,3 +172,23 @@ pnpm --filter @mobile/app add @capacitor/core@6.2.1
 gem sources --remove https://rubygems.org/
 gem sources --add https://gems.ruby-china.com/
 ```
+
+### 踩坑 5: xcrun devicectl 设备不可用
+
+**现象**: `xcrun devicectl device install app` 报错设备不可用或找不到设备。
+
+**原因**: 无线调试的设备状态可能暂时显示 `unavailable`，需要重新发现。
+
+**解决**:
+```bash
+# 先列出设备，触发设备发现（等几秒）
+xcrun devicectl list devices
+
+# 确认设备状态变为 "available (paired)" 后再安装
+xcrun devicectl device install app --device <UDID> <app路径>
+```
+
+**无线调试要求**:
+- iPhone 和 Mac 需在同一 WiFi 网络
+- 首次需 USB 配对：Xcode → Window → Devices and Simulators → 勾选 "Connect via network"
+- 配对后可脱离 USB 无线部署

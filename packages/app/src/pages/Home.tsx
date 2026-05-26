@@ -6,6 +6,8 @@ const gridItems = [
   { icon: '📈', text: '图表' },
   { icon: '📋', text: '报表' },
   { icon: '⚙️', text: '设置' },
+  { icon: '🔔', text: '通知' },
+  { icon: '👤', text: '用户' },
 ]
 
 export default function Home() {

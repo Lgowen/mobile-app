@@ -22,22 +22,22 @@ importers:
     dependencies:
       '@capacitor/app':
         specifier: ^6.0.0
-        version: 6.0.0(@capacitor/core@6.0.0)
+        version: 6.0.0(@capacitor/core@6.2.1)
       '@capacitor/core':
-        specifier: ^6.0.0
-        version: 6.0.0
+        specifier: ^6.2.1
+        version: 6.2.1
       '@capacitor/haptics':
         specifier: ^6.0.0
-        version: 6.0.0(@capacitor/core@6.0.0)
+        version: 6.0.0(@capacitor/core@6.2.1)
       '@capacitor/ios':
         specifier: ^6.2.1
-        version: 6.2.1(@capacitor/core@6.0.0)
+        version: 6.2.1(@capacitor/core@6.2.1)
       '@capacitor/keyboard':
         specifier: ^6.0.0
-        version: 6.0.0(@capacitor/core@6.0.0)
+        version: 6.0.0(@capacitor/core@6.2.1)
       '@capacitor/status-bar':
         specifier: ^6.0.0
-        version: 6.0.0(@capacitor/core@6.0.0)
+        version: 6.0.0(@capacitor/core@6.2.1)
       '@mobile/shared':
         specifier: workspace:*
         version: link:../shared
@@ -261,12 +261,12 @@ packages:
       '@babel/helper-validator-identifier': 7.28.5
     dev: true
 
-  /@capacitor/app@6.0.0(@capacitor/core@6.0.0):
+  /@capacitor/app@6.0.0(@capacitor/core@6.2.1):
     resolution: {integrity: sha512-X5UGd90Jh5p9rmoPyMqFyFWqOypdJgVJhYcM5X1YyDVJJGzmJ5MuYv1+ajj5DW9Qyh+5a3th9WYptdGby8jidA==}
     peerDependencies:
       '@capacitor/core': ^6.0.0
     dependencies:
-      '@capacitor/core': 6.0.0
+      '@capacitor/core': 6.2.1
     dev: false
 
   /@capacitor/cli@6.0.0:
@@ -296,42 +296,42 @@ packages:
       - supports-color
     dev: true
 
-  /@capacitor/core@6.0.0:
-    resolution: {integrity: sha512-NvxIQsJcMiIV+Le1DilR2GGyQQbDInfXK1UywGROQ5mycdFlW5XoAPZ+MKnFGB123RoEgE3uhDGgwTXUmSlX9A==}
+  /@capacitor/core@6.2.1:
+    resolution: {integrity: sha512-urZwxa7hVE/BnA18oCFAdizXPse6fCKanQyEqpmz6cBJ2vObwMpyJDG5jBeoSsgocS9+Ax+9vb4ducWJn0y2qQ==}
     dependencies:
       tslib: 2.8.1
     dev: false
 
-  /@capacitor/haptics@6.0.0(@capacitor/core@6.0.0):
+  /@capacitor/haptics@6.0.0(@capacitor/core@6.2.1):
     resolution: {integrity: sha512-z2TmB+pTbd98Il2I1xpZGClCFwORxxP2m9f1a0rh70c2ubj2atVyZctgxrx1fuoExZTNGSxHaylWfrmjmtelVg==}
     peerDependencies:
       '@capacitor/core': ^6.0.0
     dependencies:
-      '@capacitor/core': 6.0.0
+      '@capacitor/core': 6.2.1
     dev: false
 
-  /@capacitor/ios@6.2.1(@capacitor/core@6.0.0):
+  /@capacitor/ios@6.2.1(@capacitor/core@6.2.1):
     resolution: {integrity: sha512-tbMlQdQjxe1wyaBvYVU1yTojKJjgluZQsJkALuJxv/6F8QTw5b6vd7X785O/O7cMpIAZfUWo/vtAHzFkRV+kXw==}
     peerDependencies:
       '@capacitor/core': ^6.2.0
     dependencies:
-      '@capacitor/core': 6.0.0
+      '@capacitor/core': 6.2.1
     dev: false
 
-  /@capacitor/keyboard@6.0.0(@capacitor/core@6.0.0):
+  /@capacitor/keyboard@6.0.0(@capacitor/core@6.2.1):
     resolution: {integrity: sha512-pPX/PQWWjw5ce47kHEYv6IWlHzuhAxgXihqEAAAGLdwK3u3srgGWCljXrYS9juVBPi/lA1uK7UaUzYI0XrgxVQ==}
     peerDependencies:
       '@capacitor/core': ^6.0.0
     dependencies:
-      '@capacitor/core': 6.0.0
+      '@capacitor/core': 6.2.1
     dev: false
 
-  /@capacitor/status-bar@6.0.0(@capacitor/core@6.0.0):
+  /@capacitor/status-bar@6.0.0(@capacitor/core@6.2.1):
     resolution: {integrity: sha512-Wo0ILugYlmENegKDgTzVCPjbvP8h1ObgHslLdgeVG643ViMS/diausHIq8e104WIKCXtKIELmQeYVp9mX7932g==}
     peerDependencies:
       '@capacitor/core': ^6.0.0
     dependencies:
-      '@capacitor/core': 6.0.0
+      '@capacitor/core': 6.2.1
     dev: false
 
   /@esbuild/aix-ppc64@0.21.5:
