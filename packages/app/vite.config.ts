@@ -1,5 +1,6 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
+import UnoCSS from '@unocss/vite'
 import path from 'path'
 import { execSync } from 'child_process'
 
@@ -12,7 +13,7 @@ const gitHash = (() => {
 })()
 
 export default defineConfig({
-  plugins: [react()],
+  plugins: [UnoCSS(), react()],
   define: {
     __APP_VERSION__: JSON.stringify(process.env.npm_package_version || '1.0.0'),
     __BUILD_HASH__: JSON.stringify(gitHash),

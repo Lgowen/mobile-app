@@ -1,13 +1,35 @@
-# Akulaku Mobile App
+# Mobile App
 
 ## 项目架构
 
-- **技术栈**: React 18 + TypeScript + Capacitor 6 + antd-mobile + Vite
+- **技术栈**: React 19 + TypeScript + Capacitor 7 + antd-mobile + Vite 8 + UnoCSS
 - **架构**: pnpm monorepo（app + shared）
 - **路由**: HashRouter，三个 Tab 页 — `/home`、`/list`、`/profile`
 - **API 代理**: `/api` 请求转发到 `localhost:3456`
-- **构建流程**: Vite 打包 → Capacitor sync → iOS/Android 原生 WebView 加载
+- **构建流程**: Vite 打包 → Capacitor sync → iOS 原生 WebView 加载
 - **运行命令**: `pnpm dev`
+
+## UnoCSS
+
+项目使用 UnoCSS 原子化 CSS 方案，通过 `className` 字符串使用（React 不支持 attributify 模式）。
+
+### 配置
+
+- `uno.config.ts` — 预设配置（wind3 + icons + rem-to-px）
+- `vite.config.ts` — UnoCSS 插件必须放在 React 插件之前
+
+### 注意事项
+
+- **不要用 attributify 模式** — React 会把属性传到 DOM，导致样式不生效
+- **rem-to-px 的坑** — unitless 值（如 `leading-1.8`）会被错误换算，用 bracket syntax 保护：`!leading-[1.8]`
+- **class 语法** — 用 `className="absolute inset-0 bg-white"` 而不是 attributify 属性
+
+## 环境要求
+
+- Node.js >= 22.0.0
+- pnpm >= 11.0.0
+- Xcode 16.0+
+- CocoaPods
 
 ```
 ┌─────────────────────────────────────────┐
@@ -79,7 +101,7 @@ pnpm deploy:ios
 | 编译状态 | BUILD SUCCEEDED |
 | 架构 | arm64 (单架构) |
 | 产物类型 | Mach-O 64-bit executable |
-| 最低部署版本 | iOS 13.0 |
+| 最低部署版本 | iOS 14.0 |
 | 签名 | deploy:ios/release = 免费 Apple ID（7 天过期）；archive/upload = 付费开发者账号 |
 
 ## Claude Code 使用注意事项

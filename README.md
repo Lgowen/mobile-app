@@ -4,45 +4,51 @@
 
 基于 React + Capacitor 的跨平台移动应用
 
-[![React](https://img.shields.io/badge/React-18-61DAFB?logo=react)](https://reactjs.org/)
+[![React](https://img.shields.io/badge/React-19-61DAFB?logo=react)](https://react.dev/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.7-3178C6?logo=typescript)](https://www.typescriptlang.org/)
-[![Capacitor](https://img.shields.io/badge/Capacitor-6-119EFF?logo=capacitor)](https://capacitorjs.com/)
-[![Vite](https://img.shields.io/badge/Vite-5-646CFF?logo=vite)](https://vitejs.dev/)
-[![pnpm](https://img.shields.io/badge/pnpm-8-F69220?logo=pnpm)](https://pnpm.io/)
+[![Capacitor](https://img.shields.io/badge/Capacitor-7-119EFF?logo=capacitor)](https://capacitorjs.com/)
+[![Vite](https://img.shields.io/badge/Vite-8-646CFF?logo=vite)](https://vitejs.dev/)
+[![UnoCSS](https://img.shields.io/badge/UnoCSS-66.7-333333?logo=unocss)](https://unocss.dev/)
+[![pnpm](https://img.shields.io/badge/pnpm-11-F69220?logo=pnpm)](https://pnpm.io/)
 
 </div>
 
 ## 简介
 
-一个基于 **React 18 + TypeScript + Capacitor 6** 的跨平台移动应用，使用 **pnpm monorepo** 管理项目结构，支持 iOS 和 Android 原生打包。
+一个基于 **React 19 + TypeScript + Capacitor 7** 的跨平台移动应用，使用 **pnpm monorepo** 管理项目结构，支持 iOS 原生打包。
 
 ### 核心特性
 
-- **跨平台** — 一套代码，同时支持 Web、iOS、Android
+- **跨平台** — 一套代码，同时支持 Web、iOS
 - **类型安全** — 全量 TypeScript，严格模式
 - **组件化** — antd-mobile 移动端 UI 组件库
+- **原子化 CSS** — UnoCSS（wind3 + icons + rem-to-px），className 模式
 - **Monorepo** — pnpm workspace 管理多包依赖
 - **原生能力** — Capacitor 桥接原生 API（状态栏、键盘、触觉反馈等）
+- **React Compiler** — Vite 8 + babel-plugin-react-compiler 编译期自动优化
 
 ## 技术栈
 
 | 层级 | 技术 | 版本 |
 |------|------|------|
-| UI 框架 | React | ^18.3.0 |
-| 类型系统 | TypeScript | ~5.7.0 |
-| 构建工具 | Vite | ^5.4.0 |
-| 原生桥接 | Capacitor | ^6.0.0 |
-| 路由 | React Router | ^6.28.0 |
-| 组件库 | antd-mobile | ^5.37.0 |
-| 包管理 | pnpm | ^8.6.1 |
-| iOS 工具链 | Ruby (mise) + CocoaPods | 3.2.2 / 1.16.2 |
+| UI 框架 | React | ^19.2.6 |
+| 类型系统 | TypeScript | ~5.7.3 |
+| 构建工具 | Vite | ^8.0.14 |
+| Vite 插件 | @vitejs/plugin-react | ^6.0.2 |
+| 原子化 CSS | UnoCSS (wind3 + icons + rem-to-px) | ^66.7.0 |
+| 原生桥接 | Capacitor | ^7.6.5 |
+| 路由 | React Router | ^7.15.1 |
+| 组件库 | antd-mobile | ^5.42.3 |
+| 包管理 | pnpm | ^11.4.0 |
+| Node.js | LTS | >= 22.0.0 |
+| iOS 工具链 | Xcode + CocoaPods | 16.0+ / 1.16.2 |
 
 ## 快速开始
 
 ### 环境要求
 
-- Node.js >= 18.0.0
-- pnpm >= 8.0.0
+- Node.js >= 22.0.0
+- pnpm >= 11.0.0
 
 ### 安装
 
@@ -92,12 +98,15 @@ mobile-app/
 │   │   │   │   └── api.ts            # HTTP 请求封装
 │   │   │   └── styles/
 │   │   │       └── global.css        # 全局样式
+│   │   ├── ios/                      # iOS 原生工程（CocoaPods）
 │   │   ├── capacitor.config.ts       # Capacitor 配置
 │   │   └── vite.config.ts            # Vite 构建配置
 │   └── shared/                       # 共享包
 │       └── src/
 │           └── index.ts              # 共享类型和常量
 ├── CLAUDE.md                         # 项目文档（Claude Code 自动加载）
+├── README.md                         # 项目说明
+├── .nvmrc                            # Node.js 版本锁定
 ├── pnpm-workspace.yaml               # pnpm 工作区配置
 └── package.json                      # 根包配置
 ```
@@ -184,8 +193,7 @@ export interface ApiResponse<T> {
 
 ### 前置条件
 
-- Xcode 16.4+
-- Ruby 3.2.2（通过 mise 管理）
+- Xcode 16.0+
 - CocoaPods 1.16.2
 
 ### 环境变量
@@ -211,7 +219,7 @@ pnpm deploy:ios
 | 项目 | 值 |
 |------|-----|
 | 架构 | arm64 |
-| 最低部署版本 | iOS 13.0 |
+| 最低部署版本 | iOS 14.0 |
 | 签名 | 免费 Apple ID（7 天过期） |
 
 > 详细的环境搭建和踩坑记录见 [CLAUDE.md](./CLAUDE.md) 或运行 `/ios-build`
@@ -237,9 +245,14 @@ pnpm deploy:ios
 ```typescript
 // vite.config.ts
 {
-  plugins: [react()],
+  plugins: [react()],            // @vitejs/plugin-react 6.x (React Compiler)
   resolve: {
     alias: { '@': './src' }      // 路径别名
+  },
+  define: {
+    __APP_VERSION__,             // 注入版本号
+    __BUILD_HASH__,              // 注入 Git commit hash
+    __BUILD_TIME__               // 注入构建时间
   },
   server: {
     port: 5173,
